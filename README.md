@@ -15,11 +15,11 @@ Use `npm test` to perform `nestest` self-test. A rom file will be executed in au
 
 ## Debugger
 
-For a more interactive "experience" use `debugger.js` and pass a rom file as argument.
+For a more interactive "experience" use `npm run debugger -- path/to/rom.nes`. This will start a terminal based application shown below.
 
 ![debugger](debugger.png "debugger")
 
-Feature:
+Features:
 
 * CPU register view
 * zero-page view
@@ -30,4 +30,6 @@ Feature:
   * manage break points
 * step-by-step
 * go-mode (until it crashes)
-* stop on brak points
+* stop on break points
+
+Nothing is more satisfying than this blinking on the screen, like in Matrix and claiming that you only see blondes, brunettes and redheads.

@@ -1,4 +1,3 @@
-// TODO parse args with yargs
 if (process.argv.length < 3) {
     console.error('node-nes debugger');
     console.error('  usage:');
