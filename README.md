@@ -32,4 +32,5 @@ Features:
 * go-mode (until it crashes)
 * stop on break points
 
+While hitting Enter it will execute the loaded rom as fast as possible. But try holding Space.
 Nothing is more satisfying than this blinking on the screen, like in Matrix and claiming that you only see blondes, brunettes and redheads.
