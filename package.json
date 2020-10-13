@@ -1,0 +1,18 @@
+{
+    "name": "node-nes",
+    "version": "1.0.0",
+    "author": {
+        "name": "Klaus Hauschild",
+        "email": "klaus.hauschild.1984@gmail.com"
+    },
+    "license": "MIT",
+    "scripts": {
+        "test": "node nestest/nestest.js",
+        "debugger": "node debugger.js"
+    },
+    "dependencies": {
+        "yargs": "^16.0.3",
+        "blessed": "^0.1.81",
+        "chalk": "^4.1.0"
+    }
+}
