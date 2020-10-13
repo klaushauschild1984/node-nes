@@ -1,8 +1,8 @@
 # node-nes
 
 An emulator of the Nintendo Entertainment System. It is still work in progress.
-
-This project only serves educational purpose for my while learning NodeJS
+This project only serves educational purpose for my while learning Node.js.\
+The main goal of this project is to learn best practices for such a typical Node.js project like structure, design and testing.
 
 ## Resources
 
