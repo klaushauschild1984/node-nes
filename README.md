@@ -13,6 +13,8 @@ The main goal of this project is to learn best practices for such a typical Node
 
 Use `npm test` to perform `nestest` self-test. A rom file will be executed in auto mode.
 
+`0.09%` is currently passing.
+
 ## Debugger
 
 For a more interactive "experience" use `npm run debugger -- path/to/rom.nes`. This will start a terminal based application shown below.
