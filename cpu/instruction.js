@@ -28,15 +28,15 @@ module.exports = {
   // load
   lda: (cpu, operand) => {
     cpu.accumulator = operand
-    update_flags(cpu, operand)
+    update_flags(cpu, cpu.accumulator)
   },
   ldx: (cpu, operand) => {
     cpu.index_x = operand
-    update_flags(cpu, operand)
+    update_flags(cpu, cpu.index_x)
   },
   ldy: (cpu, operand) => {
     cpu.index_y = operand
-    update_flags(cpu, operand)
+    update_flags(cpu, cpu.index_y)
   },
 
   // store

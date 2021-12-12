@@ -5,7 +5,7 @@ module.exports = {
 
   zero_page: (cpu, operands) => {
     const address = operands[0]
-    return cpu.bus.read(address) & 0xff
+    return address & 0xff
   },
 
   zero_page_x: (cpu, operands) => {
@@ -35,14 +35,6 @@ module.exports = {
   },
 
   accumulator: (cpu, operands) => {
-    // TODO implement me
-  },
-
-  indexed: (cpu, operands) => {
-    // TODO implement me
-  },
-
-  indirect: (cpu, operands) => {
     // TODO implement me
   },
 
