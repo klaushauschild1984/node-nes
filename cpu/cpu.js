@@ -73,12 +73,12 @@ class CPU {
 
         const operands = new Array(bytes - 1);
         for (let i = 0; i < operands.length; i++) {
-            operands[i] = this.bus.read(this.program_counter + i);
+            operands[i] = this.read_pc();
         }
         this.last_instruction = `${mnemonic} [${operands.map(o => hex(o))}] (${cycles} cycles)`;
 
         this.cycles += cycles;
-        const operand = addressing(this);
+        const operand = addressing(this, operands);
         instruction(this, operand);
     }
 
@@ -89,10 +89,6 @@ class CPU {
         return byte;
     }
 
-    /**
-     *
-     * @param value
-     */
     push_stack(value) {
         this.bus.write(this.stack_pointer, value);
         this.stack_pointer -= 1;

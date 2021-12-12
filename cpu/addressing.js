@@ -1,60 +1,61 @@
 module.exports = {
-    immediate: (cpu) => {
-        return cpu.read_pc();
+    immediate: (cpu, operands) => {
+        return operands[0];
     },
 
-    zero_page: (cpu) => {
-        const address = cpu.read_pc();
+    zero_page: (cpu, operands) => {
+        const address = operands[0];
         return cpu.bus.read(address) & 0xff;
     },
 
-    zero_page_x: (cpu) => {
+    zero_page_x: (cpu, operands) => {
         // TODO implement me
     },
 
-    zero_page_y: (cpu) => {
+    zero_page_y: (cpu, operands) => {
         // TODO implement me
     },
 
-    absolute: (cpu) => {
-        const low = cpu.read_pc();
-        const high = cpu.read_pc();
+    absolute: (cpu, operands) => {
+        const low = operands[0];
+        const high = operands[1];
         return (high << 8) + low;
     },
 
-    absolute_x: (cpu) => {
+    absolute_x: (cpu, operands) => {
         // TODO implement me
     },
 
-    absolute_y: (cpu) => {
+    absolute_y: (cpu, operands) => {
         // TODO implement me
     },
 
-    implied: (cpu) => {
+    implied: (cpu, operands) => {
+        // nothing to do
     },
 
-    accumulator: (cpu) => {
+    accumulator: (cpu, operands) => {
         // TODO implement me
     },
 
-    indexed: (cpu) => {
+    indexed: (cpu, operands) => {
         // TODO implement me
     },
 
-    indirect: (cpu) => {
+    indirect: (cpu, operands) => {
         // TODO implement me
     },
 
-    indexed_indirect: (cpu) => {
+    indexed_indirect: (cpu, operands) => {
         // TODO implement me
     },
 
-    indirect_indexed: (cpu) => {
+    indirect_indexed: (cpu, operands) => {
         // TODO implement me
     },
 
-    relative: (cpu) => {
-        const pc = cpu.read_pc();
-        return cpu.program_counter + pc;
+    relative: (cpu, operands) => {
+        const address = operands[0];
+        return cpu.program_counter + address;
     }
 };

@@ -15,8 +15,7 @@ class Bus {
 
     write(address, value) {
         if (address >= 0x00 && address <= RAM_SIZE) {
-            for (let i = 0; i < this.attached.length; i++) {
-                const memory = this.attached[i];
+            for (const memory of this.attached) {
                 if (address >= memory[0] && address <= memory[1]) {
                     memory[2].write(address - memory[0], value);
                     break;
@@ -27,8 +26,7 @@ class Bus {
 
     read(address) {
         if (address >= 0x00 && address <= RAM_SIZE) {
-            for (let i = 0; i < this.attached.length; i++) {
-                const memory = this.attached[i];
+            for (const memory of this.attached) {
                 if (address >= memory[0] && address <= memory[1]) {
                     return memory[2].read(address - memory[0]);
                 }

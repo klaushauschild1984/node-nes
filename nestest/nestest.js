@@ -7,21 +7,22 @@ const cartridge = new iNes.iNes('./nestest/rom.nes');
 const cpu = new CPU.CPU(cartridge);
 cpu.program_counter = 0xc000;
 
-cpu.console_log();
-
 const assert_register = (line, start, length, register, display, name) => {
     const value = parseInt(Number(`0x${line.slice(start, start + length).toLowerCase()}`), 10);
     if (register !== value) {
-        console.error(`${name}: ${display(register, length)} <-> ${display(value, length)}`);
+        console.error(`expected ${name} to be ${display(register, length)}, but was ${display(value, length)}`);
         process.exit(1);
     }
 };
 
 const fs = require('fs');
-const lines = fs.readFileSync('./nestest/log.txt').toString().split('\r\n');
+const lines = fs.readFileSync('./nestest/log.txt').toString().split('\n');
 let passed = 0;
-for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
+for (const line of lines) {
+    console.log(`${passed + 1}: ${line}`);
+    cpu.console_log();
+    console.log(`${(passed / lines.length).toFixed(2)}% passed`);
+    console.log('');
 
     assert_register(line, 0, 4, cpu.program_counter, CPU.hex, 'PC');
     assert_register(line, 50, 2, cpu.accumulator, CPU.hex, 'A');
@@ -36,10 +37,5 @@ for (let i = 0; i < lines.length; i++) {
     // }
 
     cpu.clock();
-    cpu.console_log();
-
     passed += 1;
-
-    console.log(`${(passed / lines.length).toFixed(2)}% passed`);
-    console.log('');
 }
