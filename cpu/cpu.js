@@ -70,7 +70,9 @@ class CPU {
     for (let i = 0; i < operands.length; i++) {
       operands[i] = this.read_pc()
     }
+    operands.reverse()
     this.last_instruction = `${mnemonic} [${operands.map(o => hex(o))}] (${cycles} cycles)`
+    operands.reverse()
 
     this.cycles += cycles
     const operand = addressing(this, operands)

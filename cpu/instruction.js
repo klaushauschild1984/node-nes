@@ -27,15 +27,15 @@ module.exports = {
 
   // load
   lda: (cpu, operand) => {
-    cpu.accumulator = operand
+    cpu.accumulator = cpu.bus.read(operand)
     update_flags(cpu, cpu.accumulator)
   },
   ldx: (cpu, operand) => {
-    cpu.index_x = operand
+    cpu.index_x = cpu.bus.read(operand)
     update_flags(cpu, cpu.index_x)
   },
   ldy: (cpu, operand) => {
-    cpu.index_y = operand
+    cpu.index_y = cpu.bus.read(operand)
     update_flags(cpu, cpu.index_y)
   },
 
@@ -77,40 +77,42 @@ module.exports = {
 
   // logic
   and: (cpu, operand) => {
-    cpu.accumulator &= operand
+    cpu.accumulator &= cpu.bus.read(operand)
     update_flags(cpu, cpu.accumulator)
   },
   ora: (cpu, operand) => {
-    cpu.accumulator |= operand
+    cpu.accumulator |= cpu.bus.read(operand)
     update_flags(cpu, cpu.accumulator)
   },
   eor: (cpu, operand) => {
-    cpu.accumulator ^= operand
+    cpu.accumulator ^= cpu.bus.read(operand)
     update_flags(cpu, cpu.accumulator)
   },
 
   // arithmetic
   adc: (cpu, operand) => {
-    let result = cpu.accumulator + operand
+    let value = cpu.bus.read(operand)
+    let result = cpu.accumulator + value
     if (cpu.get_carry()) {
       result += 1
     }
 
     cpu.set_carry((result >> 8) !== 0x00)
-    cpu.set_overflow((((cpu.accumulator ^ operand) & 0x80) === 0) &&
+    cpu.set_overflow((((cpu.accumulator ^ value) & 0x80) === 0) &&
             (((cpu.accumulator ^ result) & 0x80) !== 0))
     update_flags(cpu, result)
 
     cpu.accumulator = result & 0xff
   },
   sbc: (cpu, operand) => {
-    let result = cpu.accumulator - operand
+    let value = cpu.bus.read(operand)
+    let result = cpu.accumulator - value
     if (!cpu.get_carry()) {
       result -= 1
     }
 
     cpu.set_carry((result >> 8) === 0x00)
-    cpu.set_overflow((((cpu.accumulator ^ operand) & 0x80) !== 0) &&
+    cpu.set_overflow((((cpu.accumulator ^ value) & 0x80) !== 0) &&
             (((cpu.accumulator ^ result) & 0x80) !== 0))
     update_flags(cpu, result)
 
@@ -155,13 +157,13 @@ module.exports = {
 
   // compare
   cmp: (cpu, operand) => {
-    compare(cpu, cpu.accumulator, operand)
+    compare(cpu, cpu.accumulator, cpu.bus.read(operand))
   },
   cpx: (cpu, operand) => {
-    compare(cpu, cpu.index_x, operand)
+    compare(cpu, cpu.index_x, cpu.bus.read(operand))
   },
   cpy: (cpu, operand) => {
-    compare(cpu, cpu.index_y, operand)
+    compare(cpu, cpu.index_y, cpu.bus.read(operand))
   },
   bit: (cpu, operand) => {
     const memory = cpu.bus.read(operand)

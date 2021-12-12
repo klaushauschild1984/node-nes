@@ -29,14 +29,14 @@ for (const line of lines) {
   assertRegister(line, 65, 2, cpu.status, CPU.bin, 'P')
   assertRegister(line, 71, 2, cpu.stack_pointer, CPU.hex, 'SP')
   // const cycles = parseInt(line.slice(78, 81)) / 3
-  // if (cpu.cycles != cycles) {
+  // if (cpu.cycles % 341 != cycles) {
   //     console.error(`Cycles: ${cpu.cycles} <-> ${cycles}`)
   //     process.exit(1)
   // }
 
   cpu.clock()
 
-  console.log(`${(passed / lines.length).toFixed(2)}% passed`)
+  console.log(`${(passed / lines.length * 100).toFixed(2)}% passed`)
   console.log('')
   passed += 1
 }

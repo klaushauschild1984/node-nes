@@ -1,6 +1,6 @@
 module.exports = {
   immediate: (cpu, operands) => {
-    return operands[0]
+    return cpu.program_counter - 1
   },
 
   zero_page: (cpu, operands) => {
